@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dulur Undangan – Cetak Undangan Pernikahan Berkualitas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #C4848A;
+    --rose-dark: #a86068;
+    --rose-light: #f5e6e8;
+    --rose-pale: #fdf0f1;
+    --sage: #7a9478;
+    --sage-light: #d4e4d1;
+    --sage-pale: #f0f5ef;
+    --cream: #fdf8f2;
+    --gold: #c9a84c;
+    --gold-light: #e8d49a;
+    --brown: #3b2f2f;
+    --brown-light: #6b5050;
+    --white: #ffffff;
+    --shadow: 0 8px 40px rgba(196,132,138,0.13);
+    --shadow-lg: 0 20px 60px rgba(59,47,47,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--brown);
+    overflow-x: hidden;
+  }
+
+  /* ── FLORAL DECORATIONS ────────────────────────────── */
+  .floral-svg {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.18;
+  }
+
+  /* ── NAV ────────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 18px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(253,248,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,132,138,0.15);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: var(--shadow); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--rose-dark);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--sage); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--brown-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rose); }
+
+  .nav-cta {
+    background: var(--rose);
+    color: white !important;
+    padding: 9px 22px;
+    border-radius: 50px;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--rose-dark) !important; transform: translateY(-1px); }
+
+  /* ── HERO ───────────────────────────────────────────── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 120px 5% 80px;
+    background: linear-gradient(160deg, var(--rose-pale) 0%, var(--cream) 50%, var(--sage-pale) 100%);
+  }
+
+  .hero-floral-left {
+    position: absolute;
+    left: -60px; top: 60px;
+    width: 380px; height: 380px;
+    opacity: 0.22;
+  }
+  .hero-floral-right {
+    position: absolute;
+    right: -60px; bottom: 60px;
+    width: 380px; height: 380px;
+    opacity: 0.22;
+    transform: scaleX(-1) rotate(30deg);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--sage-light);
+    color: var(--sage);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--brown);
+    margin-bottom: 12px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--rose);
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--brown-light);
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--brown-light);
+    max-width: 520px;
+    margin: 0 auto 40px;
+    line-height: 1.8;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+
+  .btn-primary {
+    background: var(--rose);
+    color: white;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(196,132,138,0.35);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { background: var(--rose-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,132,138,0.4); }
+
+  .btn-outline {
+    border: 1.5px solid var(--rose);
+    color: var(--rose);
+    padding: 13px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-outline:hover { background: var(--rose-pale); transform: translateY(-2px); }
+
+  /* ── STATS BAR ──────────────────────────────────────── */
+  .stats-bar {
+    background: var(--white);
+    padding: 28px 5%;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--rose-light);
+    border-bottom: 1px solid var(--rose-light);
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--rose);
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--brown-light);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── SECTION COMMON ─────────────────────────────────── */
+  section { padding: 90px 5%; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--brown);
+    margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: var(--rose); }
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--brown-light);
+    max-width: 540px;
+    line-height: 1.8;
+  }
+  .section-header { margin-bottom: 52px; }
+  .section-header.center { text-align: center; }
+  .section-header.center .section-subtitle { margin: 0 auto; }
+
+  /* ── PRODUK ─────────────────────────────────────────── */
+  #produk { background: var(--white); }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 28px;
+  }
+
+  .product-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: var(--cream);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .product-img-wrap {
+    position: relative;
+    overflow: hidden;
+    height: 240px;
+    background: var(--rose-light);
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .product-card:hover .product-img-wrap img { transform: scale(1.06); }
+
+  .product-badge {
+    position: absolute;
+    top: 14px; left: 14px;
+    background: var(--rose);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 50px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .product-body { padding: 20px 22px 22px; }
+
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .product-desc {
+    font-size: 0.82rem;
+    color: var(--brown-light);
+    line-height: 1.7;
+    margin-bottom: 14px;
+  }
+  .product-bonus {
+    font-size: 0.78rem;
+    color: var(--sage);
+    background: var(--sage-pale);
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+
+  .price-block { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .price-strike {
+    font-size: 0.85rem;
+    color: #aaa;
+    text-decoration: line-through;
+  }
+  .price-actual {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--rose-dark);
+  }
+  .price-min {
+    font-size: 0.75rem;
+    color: var(--brown-light);
+  }
+
+  .btn-lihat-desain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px;
+    background: var(--rose-pale);
+    border: 1.5px solid var(--rose-light);
+    border-radius: 10px;
+    color: var(--rose-dark);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-lihat-desain:hover { background: var(--rose); color: white; border-color: var(--rose); }
+  .btn-lihat-desain svg { transition: transform 0.2s; }
+  .btn-lihat-desain:hover svg { transform: translateX(3px); }
+
+  /* ── SIDEBAR DESAIN ─────────────────────────────────── */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(59,47,47,0.45);
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+    backdrop-filter: blur(4px);
+  }
+  .sidebar-overlay.active { opacity: 1; pointer-events: all; }
+
+  .sidebar {
+    position: fixed;
+    right: 0; top: 0; bottom: 0;
+    width: min(480px, 100vw);
+    background: var(--cream);
+    z-index: 2001;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.32,0,0.07,1);
+    overflow-y: auto;
+    box-shadow: -8px 0 60px rgba(59,47,47,0.18);
+  }
+  .sidebar.active { transform: translateX(0); }
+
+  .sidebar-header {
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid var(--rose-light);
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .sidebar-close {
+    margin-left: auto;
+    width: 36px; height: 36px;
+    border: 1.5px solid var(--rose-light);
+    border-radius: 50%;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brown-light);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .sidebar-close:hover { background: var(--rose); color: white; border-color: var(--rose); }
+
+  .sidebar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--brown);
+  }
+  .sidebar-subtitle {
+    font-size: 0.8rem;
+    color: var(--brown-light);
+    margin-top: 2px;
+  }
+
+  .sidebar-body { padding: 20px 24px 32px; }
+
+  .desain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .desain-card {
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 3px 16px rgba(196,132,138,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .desain-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(196,132,138,0.2); }
+
+  .desain-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    background: var(--rose-light);
+    display: block;
+  }
+
+  .desain-info { padding: 10px 12px 12px; }
+  .desain-code {
+    font-size: 0.72rem;
+    color: var(--sage);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .desain-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--rose-dark);
+    margin-bottom: 6px;
+  }
+  .desain-note {
+    font-size: 0.7rem;
+    color: var(--brown-light);
+    background: var(--sage-pale);
+    padding: 2px 7px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .sidebar-wa-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px;
+    background: #25d366;
+    color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 20px;
+    transition: all 0.2s;
+  }
+  .sidebar-wa-btn:hover { background: #1da851; transform: translateY(-1px); }
+
+  /* ── KEUNGGULAN ─────────────────────────────────────── */
+  #keunggulan { background: var(--cream); }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 24px;
+  }
+
+  .feature-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 32px 28px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .feature-card:hover { transform: translateY(-4px); }
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rose), var(--gold));
+  }
+
+  .feature-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: var(--rose-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+  }
+  .feature-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--brown);
+  }
+  .feature-desc {
+    font-size: 0.85rem;
+    color: var(--brown-light);
+    line-height: 1.7;
+  }
+
+  /* ── PROSES PESAN ───────────────────────────────────── */
+  #proses { background: var(--rose-pale); position: relative; overflow: hidden; }
+
+  .steps-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 24px;
+    position: relative;
+    padding-bottom: 36px;
+  }
+  .step-item:last-child { padding-bottom: 0; }
+  .step-item:last-child .step-line { display: none; }
+
+  .step-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 48px;
+  }
+  .step-num {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--rose);
+    color: white;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 16px rgba(196,132,138,0.35);
+    position: relative;
+    z-index: 1;
+  }
+  .step-line {
+    width: 2px;
+    flex: 1;
+    background: linear-gradient(to bottom, var(--rose-light), transparent);
+    margin-top: 8px;
+    min-height: 20px;
+  }
+  .step-content { padding-top: 10px; }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .step-desc {
+    font-size: 0.85rem;
+    color: var(--brown-light);
+    line-height: 1.7;
+  }
+
+  /* ── TESTIMONI ──────────────────────────────────────── */
+  #testimoni { background: var(--white); }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .testi-card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: var(--shadow);
+    position: relative;
+    transition: transform 0.3s;
+  }
+  .testi-card:hover { transform: translateY(-4px); }
+
+  .testi-quote {
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--rose-light);
+    font-family: 'Cormorant Garamond', serif;
+    margin-bottom: 12px;
+  }
+
+  .testi-text {
+    font-size: 0.88rem;
+    color: var(--brown);
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testi-stars {
+    color: var(--gold);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .testi-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-top: 1px solid var(--rose-light);
+    padding-top: 16px;
+  }
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose), var(--gold));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .testi-name {
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--brown);
+  }
+  .testi-city {
+    font-size: 0.78rem;
+    color: var(--brown-light);
+  }
+  .testi-product {
+    font-size: 0.73rem;
+    background: var(--rose-light);
+    color: var(--rose-dark);
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 2px;
+  }
+
+  /* ── CTA BANNER ─────────────────────────────────────── */
+  #cta {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+    text-align: center;
+    padding: 80px 5%;
+    position: relative;
+    overflow: hidden;
+  }
+  #cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  #cta .section-title { color: white; position: relative; }
+  #cta .section-title em { color: var(--gold-light); }
+  #cta .section-label { color: rgba(255,255,255,0.7); position: relative; }
+  #cta p { color: rgba(255,255,255,0.85); max-width: 480px; margin: 0 auto 36px; line-height: 1.8; font-size: 0.95rem; position: relative; }
+
+  .btn-wa-big {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25d366;
+    color: white;
+    padding: 16px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: all 0.2s;
+    position: relative;
+  }
+  .btn-wa-big:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+
+  /* ── FOOTER ─────────────────────────────────────────── */
+  footer {
+    background: var(--brown);
+    color: rgba(255,255,255,0.75);
+    padding: 60px 5% 32px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .footer-brand-name span { color: var(--rose-light); }
+  .footer-desc {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: rgba(255,255,255,0.6);
+  }
+  .social-links { display: flex; gap: 12px; }
+  .social-link {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .social-link:hover { background: var(--rose); border-color: var(--rose); color: white; }
+
+  .footer-col-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 16px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 8px; }
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--rose-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-bottom p { font-size: 0.8rem; color: rgba(255,255,255,0.4); }
+
+  /* ── FLOATING WA ────────────────────────────────────── */
+  .float-wa {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    width: 56px; height: 56px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+    z-index: 999;
+    text-decoration: none;
+    transition: all 0.2s;
+    animation: pulse-wa 2.5s infinite;
+  }
+  .float-wa:hover { transform: scale(1.1); }
+
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 6px 36px rgba(37,211,102,0.65); }
+  }
+
+  /* ── ANIMATIONS ─────────────────────────────────────── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+
+  /* ── BEST SELLER BADGE ──────────────────────────────────── */
+  .badge-bestseller {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: linear-gradient(135deg, #c9a84c, #e8c96a);
+    color: #5a3e00;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 50px;
+    letter-spacing: 0.04em;
+    box-shadow: 0 2px 8px rgba(201,168,76,0.4);
+  }
+
+  /* ── DAYS BADGE ─────────────────────────────────────────── */
+  .product-badge-days {
+    position: absolute;
+    bottom: 12px; left: 12px;
+    background: rgba(59,47,47,0.75);
+    color: white;
+    font-size: 0.68rem;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 50px;
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── CUSTOM BANNER ──────────────────────────────────────── */
+  #custom-banner {
+    background: linear-gradient(135deg, var(--rose-pale) 0%, var(--sage-pale) 100%);
+    border-top: 1px solid var(--rose-light);
+    border-bottom: 1px solid var(--rose-light);
+    padding: 36px 5%;
+  }
+  .custom-banner-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .custom-banner-icon {
+    width: 72px; height: 72px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .custom-banner-text { flex: 1; min-width: 220px; }
+  .custom-banner-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .custom-banner-title em { font-style: italic; color: var(--rose); }
+  .custom-banner-desc {
+    font-size: 0.88rem;
+    color: var(--brown-light);
+    line-height: 1.7;
+  }
+  .custom-banner-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25d366;
+    color: white;
+    padding: 11px 22px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+    white-space: nowrap;
+  }
+  .custom-banner-cta:hover { background: #1da851; transform: translateY(-2px); }
+
+  /* ── RESPONSIVE ─────────────────────────────────────── */
+
+  .footer-links li a[href*="maps.app"] {
+    line-height: 1.6;
+    display: inline-block;
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .desain-grid { grid-template-columns: 1fr 1fr; }
+    .stats-bar { gap: 32px; }
+  }
+
+  @media (max-width: 480px) {
+    .desain-grid { grid-template-columns: 1fr; }
+    .hero-btns { flex-direction: column; align-items: center; }
+  }
+
+  /* ── ORDER MODAL ────────────────────────────────────── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(59,47,47,0.55);
+    z-index: 3000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+  .modal-box {
+    background: var(--cream);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 32px 80px rgba(59,47,47,0.25);
+    transform: scale(0.92) translateY(20px);
+    transition: transform 0.35s cubic-bezier(0.32,0,0.07,1);
+    overflow: hidden;
+  }
+  .modal-overlay.active .modal-box { transform: scale(1) translateY(0); }
+
+  .modal-header {
+    background: linear-gradient(135deg, var(--rose) 0%, var(--rose-dark) 100%);
+    padding: 20px 22px 18px;
+    position: relative;
+  }
+  .modal-desain-preview {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .modal-desain-thumb {
+    width: 68px;
+    height: 68px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: var(--rose-light);
+    border: 2px solid rgba(255,255,255,0.3);
+    flex-shrink: 0;
+  }
+  .modal-desain-info { flex: 1; }
+  .modal-desain-code {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .modal-desain-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .modal-desain-price {
+    font-size: 0.9rem;
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 14px;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.35); }
+
+  .modal-body { padding: 24px 22px 22px; }
+
+  .modal-label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--brown-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .modal-label .required { color: var(--rose); }
+
+  .modal-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--rose-light);
+    border-radius: 10px;
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--brown);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    margin-bottom: 16px;
+  }
+  .modal-input:focus {
+    border-color: var(--rose);
+    box-shadow: 0 0 0 3px rgba(196,132,138,0.12);
+  }
+  .modal-input.error { border-color: #e05252; box-shadow: 0 0 0 3px rgba(224,82,82,0.1); }
+
+  .modal-error-msg {
+    font-size: 0.78rem;
+    color: #e05252;
+    margin-top: -12px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .modal-error-msg.show { display: block; }
+
+  .modal-hint {
+    font-size: 0.78rem;
+    color: var(--brown-light);
+    background: var(--sage-pale);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    line-height: 1.6;
+    border-left: 3px solid var(--sage);
+  }
+
+  .modal-btn-order {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px;
+    background: #25d366;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+  }
+  .modal-btn-order:hover { background: #1da851; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Dulur <span>Undangan</span></a>
+  <ul class="nav-links">
+    <li><a href="#produk">Produk</a></li>
+    <li><a href="#keunggulan">Keunggulan</a></li>
+    <li><a href="#proses">Cara Pesan</a></li>
+    <li><a href="#testimoni">Testimoni</a></li>
+    <li><a href="https://wa.me/6285714746412" target="_blank" class="nav-cta">Pesan Sekarang</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Floral decorations -->
+  <svg class="hero-floral-left" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="1">
+      <ellipse cx="60" cy="180" rx="40" ry="18" fill="#C4848A" transform="rotate(-40 60 180)"/>
+      <ellipse cx="80" cy="160" rx="38" ry="16" fill="#C4848A" transform="rotate(-10 80 160)"/>
+      <ellipse cx="50" cy="145" rx="36" ry="15" fill="#C4848A" transform="rotate(-70 50 145)"/>
+      <ellipse cx="95" cy="195" rx="34" ry="14" fill="#C9A84C" transform="rotate(20 95 195)"/>
+      <ellipse cx="35" cy="210" rx="32" ry="13" fill="#7a9478" transform="rotate(-50 35 210)"/>
+      <circle cx="72" cy="172" r="12" fill="#C4848A"/>
+      <line x1="72" y1="172" x2="72" y2="260" stroke="#7a9478" stroke-width="2.5"/>
+      <ellipse cx="120" cy="130" rx="28" ry="12" fill="#C4848A" transform="rotate(-25 120 130)"/>
+      <ellipse cx="140" cy="115" rx="26" ry="11" fill="#7a9478" transform="rotate(15 140 115)"/>
+      <circle cx="130" cy="122" r="9" fill="#C4848A"/>
+      <line x1="130" y1="122" x2="150" y2="200" stroke="#7a9478" stroke-width="2"/>
+    </g>
+  </svg>
+  <svg class="hero-floral-right" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="60" cy="180" rx="40" ry="18" fill="#C4848A" transform="rotate(-40 60 180)"/>
+    <ellipse cx="80" cy="160" rx="38" ry="16" fill="#C4848A" transform="rotate(-10 80 160)"/>
+    <ellipse cx="50" cy="145" rx="36" ry="15" fill="#7a9478" transform="rotate(-70 50 145)"/>
+    <ellipse cx="95" cy="195" rx="34" ry="14" fill="#C9A84C" transform="rotate(20 95 195)"/>
+    <circle cx="72" cy="172" r="12" fill="#C4848A"/>
+    <line x1="72" y1="172" x2="72" y2="260" stroke="#7a9478" stroke-width="2.5"/>
+  </svg>
+
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">✦ Cetak Undangan Pernikahan ✦</div>
+    <h1 class="hero-title">Setiap Undangan,<br><em>Sebuah Cerita Cinta</em></h1>
+    <p class="hero-tagline">Indah dalam setiap lembar, bermakna di setiap kata.</p>
+    
+    <div class="hero-btns">
+      <a href="#produk" class="btn-primary">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+        Lihat Produk
+      </a>
+      <a href="https://wa.me/6285714746412?text=Halo%20Dulur%20Undangan%2C%20saya%20ingin%20tanya%20tentang%20undangan" target="_blank" class="btn-outline">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+        Tanya via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item reveal">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Pelanggan Puas</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">145+</div>
+    <div class="stat-label">Pilihan Desain</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">24</div>
+    <div class="stat-label">Katalog Produk</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-num">⭐ 5.0</div>
+    <div class="stat-label">Rating Pelanggan</div>
+  </div>
+</div>
+
+<!-- CUSTOM DESIGN BANNER -->
+<section id="custom-banner">
+  <div class="custom-banner-inner">
+    <div class="custom-banner-icon">
+      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 30L14 24L10 20L16 6L22 12L28 8L32 14L20 26L24 30L8 30Z" fill="#f5e6e8" stroke="#C4848A" stroke-width="1.8" stroke-linejoin="round"/>
+        <circle cx="27" cy="11" r="3" fill="#C9A84C" stroke="#a88030" stroke-width="1.2"/>
+        <path d="M14 24L10 28" stroke="#7a9478" stroke-width="2" stroke-linecap="round"/>
+        <path d="M19 13L25 19" stroke="#C4848A" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/>
+      </svg>
+    </div>
+    <div class="custom-banner-text">
+      <div class="custom-banner-title">Mau Undangan <em>Custom?</em> Bisa!</div>
+      <div class="custom-banner-desc">Kami melayani <strong>custom desain, bentuk & ukuran</strong> undangan sesuai keinginanmu — mulai dari konsep, layout, hingga material kertas. Wujudkan undangan impianmu bersama kami!</div>
+    </div>
+    <a href="https://wa.me/6285714746412?text=Halo%20Dulur%20Undangan%2C%20saya%20ingin%20konsultasi%20undangan%20custom%20desain" target="_blank" class="custom-banner-cta">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326z"/></svg>
+      Chat Admin
+    </a>
+  </div>
+</section>
+
+<!-- PRODUK -->
+<section id="produk">
+  <div class="section-header">
+    <p class="section-label">✦ Koleksi Kami</p>
+    <h2 class="section-title">Pilihan <em>Undangan Pernikahan</em></h2>
+    <p class="section-subtitle">Klik pada produk untuk melihat referensi desain yang tersedia. Semua desain bisa dikustomisasi sesuai kebutuhanmu.</p>
+  </div>
+
+  <div class="product-grid" id="product-grid">
+    <div class="product-card reveal" onclick="openSidebar('katalog_griya_silver_1')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774406470/Produk%20Undangan/Katalog%20Blangko%20Griya%20Silver%201.png" alt="Katalog Griya Silver 1" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Griya Silver 1</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.410 – 4.890</span>
+          <span class="price-actual">Rp 1.410 – 3.890</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_griya_silver_2')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774406466/Produk%20Undangan/Katalog%20Blangko%20Griya%20Silver%202.png" alt="Katalog Griya Silver 2" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Griya Silver 2</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.390 – 2.650</span>
+          <span class="price-actual">Rp 1.390 – 1.650</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_griya_silver_3')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774406427/Produk%20Undangan/Katalog%20Blangko%20Griya%20Silver%203.png" alt="Katalog Griya Silver 3" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Griya Silver 3</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.325 – 2.680</span>
+          <span class="price-actual">Rp 1.325 – 1.680</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_griya_silver_4')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409706/Produk%20Undangan/Katalog%20Griya%20Silver%204.png" alt="Katalog Griya Silver 4" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Griya Silver 4</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.410 – 4.890</span>
+          <span class="price-actual">Rp 1.410 – 3.890</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_avis')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585287/Dulur%20Undangan/Katalog%20Avis.png" alt="Katalog Avis" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Avis</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.309 – 2.450</span>
+          <span class="price-actual">Rp 1.309 – 1.450</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_be_you')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585284/Dulur%20Undangan/Katalog%20Be%20You.png" alt="Katalog Be You" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Be You</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.385</span>
+          <span class="price-actual">Rp 1.385</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_byar')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585286/Dulur%20Undangan/Katalog%20Byar.png" alt="Katalog Byar" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Byar</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350 – 2.500</span>
+          <span class="price-actual">Rp 1.350 – 1.500</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_cantik')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585282/Dulur%20Undangan/Katalog%20Cantik.png" alt="Katalog Cantik" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Cantik</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350 – 2.515</span>
+          <span class="price-actual">Rp 1.350 – 1.515</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_custom')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585283/Dulur%20Undangan/Katalog%20Custom.png" alt="Katalog Custom" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Custom</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.395 – 2.600</span>
+          <span class="price-actual">Rp 1.395 – 1.600</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_indie')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585280/Dulur%20Undangan/Katalog%20INDIE.png" alt="Katalog INDIE" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog INDIE</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350 – 2.450</span>
+          <span class="price-actual">Rp 1.350 – 1.450</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_kangen')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585278/Dulur%20Undangan/Katalog%20Kangen.png" alt="Katalog Kangen" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Kangen</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350 – 2.499</span>
+          <span class="price-actual">Rp 1.350 – 1.499</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_kasih')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585279/Dulur%20Undangan/Katalog%20Kasih.png" alt="Katalog Kasih" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Kasih</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.330 – 2.999</span>
+          <span class="price-actual">Rp 1.330 – 1.999</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_khitan')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585275/Dulur%20Undangan/Katalog%20Khitan.png" alt="Katalog Khitan" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Khitan</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.385 – 2.495</span>
+          <span class="price-actual">Rp 1.385 – 1.495</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_lily')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585277/Dulur%20Undangan/Katalog%20Lily.png" alt="Katalog Lily" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Lily</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.343</span>
+          <span class="price-actual">Rp 1.343</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_lintang')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585273/Dulur%20Undangan/Katalog%20Lintang.png" alt="Katalog Lintang" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Lintang</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.343 – 2.395</span>
+          <span class="price-actual">Rp 1.343 – 1.395</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_maliq')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585274/Dulur%20Undangan/Katalog%20Maliq.png" alt="Katalog Maliq" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Maliq</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350 – 2.550</span>
+          <span class="price-actual">Rp 1.350 – 1.550</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_optima')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585270/Dulur%20Undangan/Katalog%20Optima.png" alt="Katalog Optima" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Optima</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.192 – 2.336</span>
+          <span class="price-actual">Rp 1.192 – 1.336</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_rayya')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585272/Dulur%20Undangan/Katalog%20Rayya.png" alt="Katalog Rayya" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Rayya</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.375 – 2.520</span>
+          <span class="price-actual">Rp 1.375 – 1.520</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_rizki')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585268/Dulur%20Undangan/Katalog%20Rizki.png" alt="Katalog Rizki" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Rizki</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350 – 2.500</span>
+          <span class="price-actual">Rp 1.350 – 1.500</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_salma')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585269/Dulur%20Undangan/Katalog%20Salma.png" alt="Katalog Salma" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Salma</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350 – 2.499</span>
+          <span class="price-actual">Rp 1.350 – 1.499</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_samara')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585266/Dulur%20Undangan/Katalog%20Samara.png" alt="Katalog Samara" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Samara</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.385</span>
+          <span class="price-actual">Rp 1.385</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_griya_premium')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585264/Dulur%20Undangan/Katalog%20Griya%20Premium.png" alt="Katalog Griya Premium" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog Griya Premium</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.718 – 5.150</span>
+          <span class="price-actual">Rp 1.718 – 4.150</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_u2_you_too')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585262/Dulur%20Undangan/Katalog%20U2%20You%20Too.png" alt="Katalog U2 You Too" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog U2 You Too</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.350</span>
+          <span class="price-actual">Rp 1.350</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="product-card reveal" onclick="openSidebar('katalog_x')">
+      <div class="product-img-wrap">
+        <img src="https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585261/Dulur%20Undangan/Katalog%20X.png" alt="Katalog X" loading="lazy" onerror="this.style.background='var(--rose-light)'">
+        <span class="product-badge">Blangko</span>
+        <span class="product-badge-days">🕐 1–7 Hari</span>
+        <span class="badge-bestseller">⭐ Best Seller</span>
+      </div>
+      <div class="product-body">
+        <h3 class="product-name">Katalog X</h3>
+        <span class="product-bonus">🎁 Bonus Plastik OPP & Label</span>
+        <div class="price-block">
+          <span class="price-strike">Rp 2.515 – 5.100</span>
+          <span class="price-actual">Rp 1.515 – 4.100</span>
+        </div>
+        <span class="price-min">/ pcs · Min. 100 pcs</span>
+        <button class="btn-lihat-desain" style="margin-top:14px;">
+          Lihat Referensi Desain
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  </section>
+
+<!-- SIDEBAR DESAIN -->
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div>
+      <div class="sidebar-title" id="sidebar-title">Referensi Desain</div>
+      <div class="sidebar-subtitle" id="sidebar-subtitle">Pilih desain favoritmu</div>
+    </div>
+    <button class="sidebar-close" onclick="closeSidebar()">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="sidebar-body">
+    <div class="desain-grid" id="desain-grid"></div>
+    <a href="https://wa.me/6285714746412?text=Halo%20Dulur%20Undangan%2C%20saya%20tertarik%20dengan%20desain%20undangan%20ini" target="_blank" class="sidebar-wa-btn">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+      Pesan via WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- KEUNGGULAN -->
+<section id="keunggulan">
+  <div class="section-header center">
+    <p class="section-label">✦ Mengapa Kami</p>
+    <h2 class="section-title">Keunggulan <em>Dulur Undangan</em></h2>
+    <p class="section-subtitle">Kami berkomitmen memberikan produk terbaik dengan layanan yang menyenangkan.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">🖨️</div>
+      <h3 class="feature-title">Cetak Berkualitas Tinggi</h3>
+      <p class="feature-desc">Cetak menggunakan mesin profesional dengan tinta terbaik, menghasilkan warna yang tajam dan akurat.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💰</div>
+      <h3 class="feature-title">Harga Terjangkau</h3>
+      <p class="feature-desc">Mulai dari Rp 800/pcs tanpa mengorbankan kualitas. Solusi cetak undangan hemat untuk semua kalangan.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🚚</div>
+      <h3 class="feature-title">Pengiriman Seluruh Indonesia</h3>
+      <p class="feature-desc">Kami melayani pengiriman ke seluruh penjuru Indonesia via ekspedisi terpercaya dengan aman dan tepat waktu.</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">✏️</div>
+      <h3 class="feature-title">Desain & Bahan Custom</h3>
+      <p class="feature-desc">Pilih font, layout, dan bahan kertas sesuai keinginan. Desain bisa disesuaikan dengan tema pernikahan kamu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROSES PESAN -->
+<section id="proses">
+  <div class="section-header center">
+    <p class="section-label">✦ Cara Memesan</p>
+    <h2 class="section-title">Mudah & <em>Cepat</em></h2>
+    <p class="section-subtitle">Hanya 6 langkah mudah untuk mendapatkan undangan impian kamu.</p>
+  </div>
+  <div class="steps-wrap">
+    <div class="step-item reveal">
+      <div class="step-left">
+        <div class="step-num">1</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Pilih Model & Desain</h3>
+        <p class="step-desc">Telusuri koleksi undangan kami dan pilih model serta referensi desain yang paling sesuai dengan tema pernikahanmu.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-left">
+        <div class="step-num">2</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Hubungi via WhatsApp</h3>
+        <p class="step-desc">Hubungi kami via WhatsApp. Admin akan mengirimkan detail pesanan & format data undangan yang perlu diisi.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-left">
+        <div class="step-num">3</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Isi Data Pesanan</h3>
+        <p class="step-desc">Kirimkan data nama mempelai, detail acara, dan informasi lain yang akan tercantum di undangan.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-left">
+        <div class="step-num">4</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Bayar DP 20% untuk Booking & Desain</h3>
+        <p class="step-desc">Lakukan pembayaran DP 20% untuk proses booking slot dan pembuatan desain. Desain akan dikirim untuk persetujuanmu setelah DP lunas.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-left">
+        <div class="step-num">5</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Bayar 60% untuk Cetak & Finishing</h3>
+        <p class="step-desc">Setelah desain disetujui, lakukan pembayaran 60% sebelum proses cetak dan finishing dimulai.</p>
+      </div>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-left">
+        <div class="step-num">6</div>
+        <div class="step-line"></div>
+      </div>
+      <div class="step-content">
+        <h3 class="step-title">Pelunasan & Pengiriman</h3>
+        <p class="step-desc">Lakukan pelunasan 20% sisanya, lalu pesanan siap diambil atau dikirim ke alamatmu di seluruh Indonesia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section id="testimoni">
+  <div class="section-header center">
+    <p class="section-label">✦ Kata Mereka</p>
+    <h2 class="section-title">Cerita <em>Pelanggan Kami</em></h2>
+    <p class="section-subtitle">Ribuan pasangan telah mempercayakan undangan pernikahan mereka kepada Dulur Undangan.</p>
+  </div>
+  <div class="testimonials-grid">
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Hasilnya melampaui ekspektasi saya! Cetakannya sangat rapi, warnanya tajam persis seperti di desain. Pengirimannya juga cepat sampai ke Bandung. Tamu-tamu pada memuji undangannya.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">AR</div>
+        <div>
+          <div class="testi-name">Anisa & Rizky</div>
+          <div class="testi-city">Bandung, Jawa Barat</div>
+          <span class="testi-product">Blangko Griya Silver 1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Pelayanannya ramah banget, responsif, dan sabar menemani revisi desain sampai kita benar-benar puas. Harganya sangat bersahabat untuk kualitas yang didapat. Highly recommended!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">DF</div>
+        <div>
+          <div class="testi-name">Dinda & Farhan</div>
+          <div class="testi-city">Surabaya, Jawa Timur</div>
+          <span class="testi-product">Blangko Griya Silver 2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Pesan 300 pcs undangan untuk pernikahan kami. Datang tepat waktu, packagingnya aman, tidak ada yang rusak sama sekali. Font dan tata letak bisa disesuaikan, hasilnya cantik sekali!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">SR</div>
+        <div>
+          <div class="testi-name">Sari & Rendi</div>
+          <div class="testi-city">Jakarta Selatan, DKI Jakarta</div>
+          <span class="testi-product">Blangko Griya Silver 3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Saya sudah pakai Dulur Undangan untuk dua kali acara — pernikahan adik dan sepupu saya. Hasilnya selalu memuaskan. Pasti akan kembali lagi kalau ada kebutuhan cetak undangan!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">NW</div>
+        <div>
+          <div class="testi-name">Novita W.</div>
+          <div class="testi-city">Yogyakarta, DIY</div>
+          <span class="testi-product">Blangko Griya Silver 1 & 2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Prosesnya mudah banget, tinggal WA langsung direspons. Desainnya bisa dikustom sesuai tema pernikahan kami yang dusty rose. Hasilnya benar-benar sesuai harapan!</p>
+      <div class="testi-author">
+        <div class="testi-avatar">MP</div>
+        <div>
+          <div class="testi-name">Mira & Putra</div>
+          <div class="testi-city">Semarang, Jawa Tengah</div>
+          <span class="testi-product">Blangko Griya Silver 2</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="testi-card reveal">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">Harganya terjangkau tapi kualitasnya tidak murahan sama sekali. Kertas 160gsm terasa premium di tangan. Bonus plastik OPP dan labelnya sangat membantu untuk pengemasan undangan.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">HL</div>
+        <div>
+          <div class="testi-name">Hani & Lukman</div>
+          <div class="testi-city">Makassar, Sulawesi Selatan</div>
+          <span class="testi-product">Blangko Griya Silver 3</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <p class="section-label">✦ Yuk Mulai</p>
+  <h2 class="section-title">Siap Mencetak Undangan<br><em>Pernikahan Impianmu?</em></h2>
+  <p>Hubungi kami sekarang dan dapatkan konsultasi gratis. Kami siap membantu mewujudkan undangan pernikahan yang indah sesuai budget dan selera kamu.</p>
+  <a href="https://wa.me/6285714746412?text=Halo%20Dulur%20Undangan%2C%20saya%20ingin%20konsultasi%20cetak%20undangan%20pernikahan" target="_blank" class="btn-wa-big">
+    <svg width="22" height="22" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+    Konsultasi Gratis via WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">Dulur <span>Undangan</span></div>
+      <p class="footer-desc">Menghadirkan undangan pernikahan berkualitas tinggi dengan sentuhan romantis dan harga terjangkau. Melayani pengiriman ke seluruh Indonesia.</p>
+      <div class="social-links">
+        <a href="https://instagram.com/dulur.undangan" target="_blank" class="social-link" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://tiktok.com/@dulur.undangan" target="_blank" class="social-link" title="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigasi</div>
+      <ul class="footer-links">
+        <li><a href="#produk">Produk</a></li>
+        <li><a href="#keunggulan">Keunggulan</a></li>
+        <li><a href="#proses">Cara Pesan</a></li>
+        <li><a href="#testimoni">Testimoni</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Kontak</div>
+      <ul class="footer-links">
+        <li><a href="https://wa.me/6285714746412" target="_blank">📱 0857-1474-6412</a></li>
+        <li><a href="https://instagram.com/dulur.undangan" target="_blank">📸 @dulur.undangan</a></li>
+        <li><a href="https://tiktok.com/@dulur.undangan" target="_blank">🎵 @dulur.undangan</a></li>
+        <li><a href="#">⏰ Senin–Minggu, 08–21 WIB</a></li>
+        <li><a href="#">📦 Seluruh Indonesia</a></li>
+        <li><a href="https://maps.app.goo.gl/aymicSyQ1Uyid1L99" target="_blank">📍 Perum Nuansa Sukatani Blok B8 No.14, RT04/RW08, Sukatani, Tangerang, Banten</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Dulur Undangan. All rights reserved.</p>
+    <p>Indah dalam setiap lembar, bermakna di setiap kata.</p>
+  </div>
+</footer>
+
+<!-- ORDER MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleModalOverlayClick(event)">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-header">
+      <div class="modal-desain-preview">
+        <img class="modal-desain-thumb" id="modal-thumb" src="" alt="">
+        <div class="modal-desain-info">
+          <div class="modal-desain-code" id="modal-code"></div>
+          <div class="modal-desain-name" id="modal-name"></div>
+          <div class="modal-desain-price" id="modal-price"></div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-label">Nama Pemesan <span class="required">*</span></div>
+      <input class="modal-input" id="input-nama" type="text" placeholder="Contoh: Budi & Anisa" maxlength="80">
+      <div class="modal-error-msg" id="err-nama">Nama pemesan wajib diisi.</div>
+
+      <div class="modal-label">Tanggal Acara <span class="required">*</span></div>
+      <input class="modal-input" id="input-tanggal" type="date">
+      <div class="modal-error-msg" id="err-tanggal">Tanggal acara wajib diisi.</div>
+
+      <div class="modal-hint">
+        💬 Setelah klik tombol di bawah, kamu akan diarahkan ke WhatsApp dengan pesan yang sudah terisi otomatis. Admin kami siap membantu!
+      </div>
+
+      <button class="modal-btn-order" onclick="orderViaWA()">
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+        Order via WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING WA -->
+<a href="https://wa.me/6285714746412?text=Halo%20Dulur%20Undangan%2C%20saya%20ingin%20tanya%20tentang%20undangan" target="_blank" class="float-wa" title="Chat WhatsApp">
+  <svg width="28" height="28" fill="white" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/></svg>
+</a>
+
+<script>
+  // ── DATA DESAIN ─────────────────────────────────────────
+    const desainData = {
+    katalog_griya_silver_1: { title: "Katalog Griya Silver 1", subtitle: "11 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774406470/Produk%20Undangan/Katalog%20Blangko%20Griya%20Silver%201.png", desain: [{"code": "GS-000", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407073/Produk%20Undangan/GS-000.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "GS-001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407075/Produk%20Undangan/GS-001.png", "harga": "Rp 1.580", "note": "Free Label & Plastik"}, {"code": "GS-002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407076/Produk%20Undangan/GS-002.png", "harga": "Rp 1.580", "note": "Free Label & Plastik"}, {"code": "GS-003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407078/Produk%20Undangan/GS-003.png", "harga": "Rp 1.660", "note": "Free Label & Plastik"}, {"code": "GS-004", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407079/Produk%20Undangan/GS-004.png", "harga": "Rp 1.660", "note": "Free Label & Plastik"}, {"code": "GS-005", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407080/Produk%20Undangan/GS-005.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-006", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407081/Produk%20Undangan/GS-006.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-007", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407083/Produk%20Undangan/GS-007.png", "harga": "Rp 1.690", "note": "Free Label & Plastik"}, {"code": "GS-008", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407084/Produk%20Undangan/GS-008.png", "harga": "Rp 1.640", "note": "Free Label & Plastik"}, {"code": "GS-009", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407086/Produk%20Undangan/GS-009.png", "harga": "Rp 3.890", "note": "Free Label & Plastik"}, {"code": "GS-010", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407087/Produk%20Undangan/GS-010.png", "harga": "Rp 3.890", "note": "Free Label & Plastik"}] },
+    katalog_griya_silver_2: { title: "Katalog Griya Silver 2", subtitle: "10 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774406466/Produk%20Undangan/Katalog%20Blangko%20Griya%20Silver%202.png", desain: [{"code": "GS-011", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407088/Produk%20Undangan/GS-011.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "GS-012", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407089/Produk%20Undangan/GS-012.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "GS-013", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407092/Produk%20Undangan/GS-013.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "GS-014", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407094/Produk%20Undangan/GS-014.png", "harga": "Rp 1.570", "note": "Free Label & Plastik"}, {"code": "GS-015", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407095/Produk%20Undangan/GS-015.png", "harga": "Rp 1.590", "note": "Free Label & Plastik"}, {"code": "GS-016", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407097/Produk%20Undangan/GS-016.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-017", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407098/Produk%20Undangan/GS-017.png", "harga": "Rp 1.610", "note": "Free Label & Plastik"}, {"code": "GS-018", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407100/Produk%20Undangan/GS-018.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-019", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407101/Produk%20Undangan/GS-019.png", "harga": "Rp 1.610", "note": "Free Label & Plastik"}, {"code": "GS-020", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407103/Produk%20Undangan/GS-020.png", "harga": "Rp 1.650", "note": "Free Label & Plastik"}] },
+    katalog_griya_silver_3: { title: "Katalog Griya Silver 3", subtitle: "10 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774406427/Produk%20Undangan/Katalog%20Blangko%20Griya%20Silver%203.png", desain: [{"code": "GS-021", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407104/Produk%20Undangan/GS-021.png", "harga": "Rp 1.680", "note": "Free Label & Plastik"}, {"code": "GS-022", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407106/Produk%20Undangan/GS-022.png", "harga": "Rp 1.325", "note": "Free Label & Plastik"}, {"code": "GS-023", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407108/Produk%20Undangan/GS-023.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "GS-024", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407110/Produk%20Undangan/GS-024.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "GS-025", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407111/Produk%20Undangan/GS-025.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "GS-026", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407112/Produk%20Undangan/GS-026.png", "harga": "Rp 1.570", "note": "Free Label & Plastik"}, {"code": "GS-027", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407114/Produk%20Undangan/GS-027.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-028", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407116/Produk%20Undangan/GS-028.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-029", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407118/Produk%20Undangan/GS-029.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-030", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407119/Produk%20Undangan/GS-030.png", "harga": "Rp 1.650", "note": "Free Label & Plastik"}] },
+    katalog_griya_silver_4: { title: "Katalog Griya Silver 4", subtitle: "8 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409706/Produk%20Undangan/Katalog%20Griya%20Silver%204.png", desain: [{"code": "GS-031", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407121/Produk%20Undangan/GS-031.png", "harga": "Rp 1.680", "note": "Free Label & Plastik"}, {"code": "GS-032", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774407122/Produk%20Undangan/GS-032.png", "harga": "Rp 3.890", "note": "Free Label & Plastik"}, {"code": "GS-033", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409576/Produk%20Undangan/GS-033.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "GS-034", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409584/Produk%20Undangan/GS-034.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "GS-035", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409589/Produk%20Undangan/GS-035.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "GS-036", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409590/Produk%20Undangan/GS-036.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-037", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409592/Produk%20Undangan/GS-037.png", "harga": "Rp 1.620", "note": "Free Label & Plastik"}, {"code": "GS-038", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774409594/Produk%20Undangan/GS-038.png", "harga": "Rp 1.690", "note": "Free Label & Plastik"}] },
+    katalog_avis: { title: "Katalog Avis", subtitle: "31 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585287/Dulur%20Undangan/Katalog%20Avis.png", desain: [{"code": "Avis 111", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580234/Dulur%20Undangan/Avis%20111.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Avis 112", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580235/Dulur%20Undangan/Avis%20112.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Avis 113", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580236/Dulur%20Undangan/Avis%20113.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Avis 114", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580237/Dulur%20Undangan/Avis%20114.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Avis 116", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580238/Dulur%20Undangan/Avis%20116.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Avis 117", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580239/Dulur%20Undangan/Avis%20117.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 118", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580240/Dulur%20Undangan/Avis%20118.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 119", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580241/Dulur%20Undangan/Avis%20119.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 120", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580242/Dulur%20Undangan/Avis%20120.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 121", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580243/Dulur%20Undangan/Avis%20121.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Avis 122", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580244/Dulur%20Undangan/Avis%20122.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Avis 123", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580245/Dulur%20Undangan/Avis%20123.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 125", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580246/Dulur%20Undangan/Avis%20125.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 126", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580247/Dulur%20Undangan/Avis%20126.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 127", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580249/Dulur%20Undangan/Avis%20127.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 128", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580250/Dulur%20Undangan/Avis%20128.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 129", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580251/Dulur%20Undangan/Avis%20129.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 130", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580252/Dulur%20Undangan/Avis%20130.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 131", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580253/Dulur%20Undangan/Avis%20131.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Avis 132", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580255/Dulur%20Undangan/Avis%20132.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Avis 133", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580256/Dulur%20Undangan/Avis%20133.png", "harga": "Rp 1.360", "note": "Free Label & Plastik"}, {"code": "Avis 134", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580257/Dulur%20Undangan/Avis%20134.png", "harga": "Rp 1.360", "note": "Free Label & Plastik"}, {"code": "Avis 135", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580258/Dulur%20Undangan/Avis%20135.png", "harga": "Rp 1.360", "note": "Free Label & Plastik"}, {"code": "Avis 136", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580259/Dulur%20Undangan/Avis%20136.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 137", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580260/Dulur%20Undangan/Avis%20137.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "Avis 138", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580261/Dulur%20Undangan/Avis%20138.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "Avis 139", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580262/Dulur%20Undangan/Avis%20139.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "Avis 140", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580263/Dulur%20Undangan/Avis%20140.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "Avis 141", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580265/Dulur%20Undangan/Avis%20141.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 142", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580266/Dulur%20Undangan/Avis%20142.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Avis 143", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580268/Dulur%20Undangan/Avis%20143.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}] },
+    katalog_be_you: { title: "Katalog Be You", subtitle: "5 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585284/Dulur%20Undangan/Katalog%20Be%20You.png", desain: [{"code": "Be You BU 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580269/Dulur%20Undangan/Be%20You%20BU%2001.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Be You BU 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580270/Dulur%20Undangan/Be%20You%20BU%2002.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Be You BU 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580272/Dulur%20Undangan/Be%20You%20BU%2003.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Be You BU 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580273/Dulur%20Undangan/Be%20You%20BU%2004.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Be You BU 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580274/Dulur%20Undangan/Be%20You%20BU%2006.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}] },
+    katalog_byar: { title: "Katalog Byar", subtitle: "25 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585286/Dulur%20Undangan/Katalog%20Byar.png", desain: [{"code": "Byar 59", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580275/Dulur%20Undangan/Byar%2059.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Byar 60", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580277/Dulur%20Undangan/Byar%2060%20%281%29.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Byar 61", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580279/Dulur%20Undangan/Byar%2061.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Byar 62", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580280/Dulur%20Undangan/Byar%2062.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Byar 63", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580281/Dulur%20Undangan/Byar%2063.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Byar 67", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580283/Dulur%20Undangan/Byar%2067.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Byar 70", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580285/Dulur%20Undangan/Byar%2070.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Byar 72", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580287/Dulur%20Undangan/Byar%2072.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Byar 73", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580289/Dulur%20Undangan/Byar%2073.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Byar 74", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580291/Dulur%20Undangan/Byar%2074.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Byar 75", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580293/Dulur%20Undangan/Byar%2075.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Byar 76", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580295/Dulur%20Undangan/Byar%2076.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Byar 77", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580297/Dulur%20Undangan/Byar%2077.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Byar 78", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580299/Dulur%20Undangan/Byar%2078.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Byar 79", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580301/Dulur%20Undangan/Byar%2079.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Byar 80", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580303/Dulur%20Undangan/Byar%2080.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Byar 81", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580305/Dulur%20Undangan/Byar%2081.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Byar 82", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580307/Dulur%20Undangan/Byar%2082.png", "harga": "Rp 1.425", "note": "Free Label & Plastik"}, {"code": "Byar 83", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580309/Dulur%20Undangan/Byar%2083.png", "harga": "Rp 1.495", "note": "Free Label & Plastik"}, {"code": "Byar 84", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580310/Dulur%20Undangan/Byar%2084.png", "harga": "Rp 1.495", "note": "Free Label & Plastik"}, {"code": "Byar 85", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580312/Dulur%20Undangan/Byar%2085.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Byar 86", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580314/Dulur%20Undangan/Byar%2086.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Byar 87", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580318/Dulur%20Undangan/Byar%2087.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Byar 89", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580320/Dulur%20Undangan/Byar%2089.png", "harga": "Rp 1.495", "note": "Free Label & Plastik"}, {"code": "Byar 90", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580322/Dulur%20Undangan/Byar%2090.png", "harga": "Rp 1.495", "note": "Free Label & Plastik"}] },
+    katalog_cantik: { title: "Katalog Cantik", subtitle: "35 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585282/Dulur%20Undangan/Katalog%20Cantik.png", desain: [{"code": "Cantik 67", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580325/Dulur%20Undangan/Cantik%2067.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Cantik 68", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580327/Dulur%20Undangan/Cantik%2068.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Cantik 74", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580329/Dulur%20Undangan/Cantik%2074.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Cantik 76", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580331/Dulur%20Undangan/Cantik%2076.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Cantik 77", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580333/Dulur%20Undangan/Cantik%2077.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Cantik 78", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580335/Dulur%20Undangan/Cantik%2078.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Cantik 79", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580337/Dulur%20Undangan/Cantik%2079.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Cantik 80", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580339/Dulur%20Undangan/Cantik%2080.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Cantik 81", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580341/Dulur%20Undangan/Cantik%2081.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "Cantik 82", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580343/Dulur%20Undangan/Cantik%2082.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "Cantik 83", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580345/Dulur%20Undangan/Cantik%2083.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "Cantik 85", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580347/Dulur%20Undangan/Cantik%2085.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}, {"code": "Cantik 88", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580349/Dulur%20Undangan/Cantik%2088.png", "harga": "Rp 1.425", "note": "Free Label & Plastik"}, {"code": "Cantik 90", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580351/Dulur%20Undangan/Cantik%2090.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}, {"code": "Cantik 91", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580353/Dulur%20Undangan/Cantik%2091.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}, {"code": "Cantik 92", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580354/Dulur%20Undangan/Cantik%2092.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}, {"code": "Cantik 93", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580356/Dulur%20Undangan/Cantik%2093.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}, {"code": "Cantik 94", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580357/Dulur%20Undangan/Cantik%2094.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 95", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580359/Dulur%20Undangan/Cantik%2095.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 96", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580360/Dulur%20Undangan/Cantik%2096.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 97", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580362/Dulur%20Undangan/Cantik%2097.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 98", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580364/Dulur%20Undangan/Cantik%2098.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "Cantik 99", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580366/Dulur%20Undangan/Cantik%2099.png", "harga": "Rp 1.420", "note": "Free Label & Plastik"}, {"code": "Cantik 100", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580368/Dulur%20Undangan/Cantik%20100.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Cantik 101", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580370/Dulur%20Undangan/Cantik%20101.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Cantik 102", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580372/Dulur%20Undangan/Cantik%20102.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 103", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580374/Dulur%20Undangan/Cantik%20103.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Cantik 105", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580376/Dulur%20Undangan/Cantik%20105.png", "harga": "Rp 1.475", "note": "Free Label & Plastik"}, {"code": "Cantik 106", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580378/Dulur%20Undangan/Cantik%20106.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Cantik 107", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580380/Dulur%20Undangan/Cantik%20107.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Cantik 108", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580382/Dulur%20Undangan/Cantik%20108.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 109", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580384/Dulur%20Undangan/Cantik%20109.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 110", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580386/Dulur%20Undangan/Cantik%20110.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Cantik 112", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580388/Dulur%20Undangan/Cantik%20112.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Cantik 113", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580390/Dulur%20Undangan/Cantik%20113.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}] },
+    katalog_custom: { title: "Katalog Custom", subtitle: "11 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585283/Dulur%20Undangan/Katalog%20Custom.png", desain: [{"code": "Custom 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580392/Dulur%20Undangan/Custom%2001.png", "harga": "Rp 1.685", "note": "Free Label & Plastik"}, {"code": "Custom 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580394/Dulur%20Undangan/Custom%2002.png", "harga": "Rp 1.685", "note": "Free Label & Plastik"}, {"code": "Custom 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580396/Dulur%20Undangan/Custom%2003.png", "harga": "Rp 1.685", "note": "Free Label & Plastik"}, {"code": "Custom 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580398/Dulur%20Undangan/Custom%2004.png", "harga": "Rp 1.685", "note": "Free Label & Plastik"}, {"code": "Custom 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580400/Dulur%20Undangan/Custom%2005.png", "harga": "Rp 4.100", "note": "Free Label & Plastik"}, {"code": "Custom 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580402/Dulur%20Undangan/Custom%2006.png", "harga": "Rp 4.100", "note": "Free Label & Plastik"}, {"code": "Custom 07", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580404/Dulur%20Undangan/Custom%2007.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Custom 08", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580406/Dulur%20Undangan/Custom%2008.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Custom 09", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580408/Dulur%20Undangan/Custom%2009.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Custom 10", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580410/Dulur%20Undangan/Custom%2010.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Custom 11", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580412/Dulur%20Undangan/Custom%2011.png", "harga": "Rp 4.100", "note": "Free Label & Plastik"}] },
+    katalog_indie: { title: "Katalog INDIE", subtitle: "17 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585280/Dulur%20Undangan/Katalog%20INDIE.png", desain: [{"code": "INDIE iN 81 MDR Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580414/Dulur%20Undangan/INDIE%20iN%2081%20MDR%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 81 TF (Tanpa Foil)", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580416/Dulur%20Undangan/INDIE%20iN%2081%20TF%20%28Tanpa%20Foil%29.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "INDIE iN 82 STD Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580418/Dulur%20Undangan/INDIE%20iN%2082%20STD%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 82 TF (Tanpa Foil)", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580420/Dulur%20Undangan/INDIE%20iN%2082%20TF%20%28Tanpa%20Foil%29.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "INDIE iN 82 TW Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580422/Dulur%20Undangan/INDIE%20iN%2082%20TW%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 83 MDR Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580425/Dulur%20Undangan/INDIE%20iN%2083%20MDR%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 83 TF (Tanpa Foil)", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580427/Dulur%20Undangan/INDIE%20iN%2083%20TF%20%28Tanpa%20Foil%29.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "INDIE iN 83 TW Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580429/Dulur%20Undangan/INDIE%20iN%2083%20TW%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 84 STD Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580431/Dulur%20Undangan/INDIE%20iN%2084%20STD%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 84 TF (Tanpa Foil)", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580433/Dulur%20Undangan/INDIE%20iN%2084%20TF%20%28Tanpa%20Foil%29.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "INDIE iN 84 TW Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580435/Dulur%20Undangan/INDIE%20iN%2084%20TW%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 85 MDR Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580437/Dulur%20Undangan/INDIE%20iN%2085%20MDR%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 85 STD Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580439/Dulur%20Undangan/INDIE%20iN%2085%20STD%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 85 TF (Tanpa Foil)", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580441/Dulur%20Undangan/INDIE%20iN%2085%20TF%20%28Tanpa%20Foil%29.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "INDIE iN 86 MDR Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580443/Dulur%20Undangan/INDIE%20iN%2086%20MDR%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 86 STD Foil", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580445/Dulur%20Undangan/INDIE%20iN%2086%20STD%20Foil.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "INDIE iN 86 TF (Tanpa Foil)", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580447/Dulur%20Undangan/INDIE%20iN%2086%20TF%20%28Tanpa%20Foil%29.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}] },
+    katalog_kangen: { title: "Katalog Kangen", subtitle: "12 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585278/Dulur%20Undangan/Katalog%20Kangen.png", desain: [{"code": "Kangen 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580449/Dulur%20Undangan/Kangen%2001.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kangen 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580450/Dulur%20Undangan/Kangen%2002.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kangen 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580451/Dulur%20Undangan/Kangen%2003.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kangen 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580453/Dulur%20Undangan/Kangen%2004.png", "harga": "Rp 1.425", "note": "Free Label & Plastik"}, {"code": "Kangen Env 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580454/Dulur%20Undangan/Kangen%20Env%2001.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kangen Env 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580455/Dulur%20Undangan/Kangen%20Env%2002.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kangen Env 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580457/Dulur%20Undangan/Kangen%20Env%2003.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kangen Env 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580459/Dulur%20Undangan/Kangen%20Env%2004.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kangen Env 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580460/Dulur%20Undangan/Kangen%20Env%2005.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kangen Env 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580462/Dulur%20Undangan/Kangen%20Env%2006.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kangen Lite 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580463/Dulur%20Undangan/Kangen%20Lite%2001.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Kangen Lite 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580464/Dulur%20Undangan/Kangen%20Lite%2002.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}] },
+    katalog_kasih: { title: "Katalog Kasih", subtitle: "24 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585279/Dulur%20Undangan/Katalog%20Kasih.png", desain: [{"code": "Kasih 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580466/Dulur%20Undangan/Kasih%2001.png", "harga": "Rp 1.375", "note": "Free Label & Plastik"}, {"code": "Kasih 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580467/Dulur%20Undangan/Kasih%2002.png", "harga": "Rp 1.375", "note": "Free Label & Plastik"}, {"code": "Kasih 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580468/Dulur%20Undangan/Kasih%2003.png", "harga": "Rp 1.375", "note": "Free Label & Plastik"}, {"code": "Kasih 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580470/Dulur%20Undangan/Kasih%2004.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "Kasih 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580471/Dulur%20Undangan/Kasih%2005.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "Kasih 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580474/Dulur%20Undangan/Kasih%2006.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "Kasih 07", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580478/Dulur%20Undangan/Kasih%2007.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kasih 08", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580486/Dulur%20Undangan/Kasih%2008.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kasih 09", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580487/Dulur%20Undangan/Kasih%2009.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kasih 10", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580489/Dulur%20Undangan/Kasih%2010.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kasih 11", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580490/Dulur%20Undangan/Kasih%2011.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kasih 12", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580491/Dulur%20Undangan/Kasih%2012.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Kasih AMP 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580492/Dulur%20Undangan/Kasih%20AMP%2001.png", "harga": "Rp 3.499", "note": "Free Label & Plastik"}, {"code": "Kasih Env 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580494/Dulur%20Undangan/Kasih%20Env%2001.png", "harga": "Rp 1.425", "note": "Free Label & Plastik"}, {"code": "Kasih Env 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580495/Dulur%20Undangan/Kasih%20Env%2002.png", "harga": "Rp 1.425", "note": "Free Label & Plastik"}, {"code": "Kasih Env 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580496/Dulur%20Undangan/Kasih%20Env%2003.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kasih Env 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580497/Dulur%20Undangan/Kasih%20Env%2004.png", "harga": "Rp 1.449", "note": "Free Label & Plastik"}, {"code": "Kasih Lite 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580499/Dulur%20Undangan/Kasih%20Lite%2001.png", "harga": "Rp 1.330", "note": "Free Label & Plastik"}, {"code": "Kasih Lite 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580500/Dulur%20Undangan/Kasih%20Lite%2002.png", "harga": "Rp 1.330", "note": "Free Label & Plastik"}, {"code": "Kasih Lite 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580502/Dulur%20Undangan/Kasih%20Lite%2003.png", "harga": "Rp 1.330", "note": "Free Label & Plastik"}, {"code": "Kasih Lite 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580504/Dulur%20Undangan/Kasih%20Lite%2004.png", "harga": "Rp 1.330", "note": "Free Label & Plastik"}, {"code": "Kasih Lite 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580505/Dulur%20Undangan/Kasih%20Lite%2005.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Kasih Lite 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580506/Dulur%20Undangan/Kasih%20Lite%2006.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Kasih MF 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580508/Dulur%20Undangan/Kasih%20MF%2001.png", "harga": "Rp 1.475", "note": "Free Label & Plastik"}] },
+    katalog_khitan: { title: "Katalog Khitan", subtitle: "4 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585275/Dulur%20Undangan/Katalog%20Khitan.png", desain: [{"code": "Khitan K 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580509/Dulur%20Undangan/Khitan%20K%2001.png", "harga": "Rp 1.495", "note": "Free Label & Plastik"}, {"code": "Khitan K 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580511/Dulur%20Undangan/Khitan%20K%2002.png", "harga": "Rp 1.495", "note": "Free Label & Plastik"}, {"code": "Khitan K 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580512/Dulur%20Undangan/Khitan%20K%2004.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Khitan K 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580514/Dulur%20Undangan/Khitan%20K%2005.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}] },
+    katalog_lily: { title: "Katalog Lily", subtitle: "4 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585277/Dulur%20Undangan/Katalog%20Lily.png", desain: [{"code": "Lily 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580515/Dulur%20Undangan/Lily%2001.png", "harga": "Rp 1.343", "note": "Free Label & Plastik"}, {"code": "Lily 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580516/Dulur%20Undangan/Lily%2003.png", "harga": "Rp 1.343", "note": "Free Label & Plastik"}, {"code": "Lily 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580517/Dulur%20Undangan/Lily%2004.png", "harga": "Rp 1.343", "note": "Free Label & Plastik"}, {"code": "Lily 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580519/Dulur%20Undangan/Lily%2006.png", "harga": "Rp 1.343", "note": "Free Label & Plastik"}] },
+    katalog_lintang: { title: "Katalog Lintang", subtitle: "29 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585273/Dulur%20Undangan/Katalog%20Lintang.png", desain: [{"code": "Lintang 82", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580520/Dulur%20Undangan/Lintang%2082.png", "harga": "Rp 1.380", "note": "Free Label & Plastik"}, {"code": "Lintang 84", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580522/Dulur%20Undangan/Lintang%2084.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 85", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580523/Dulur%20Undangan/Lintang%2085.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 87", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580525/Dulur%20Undangan/Lintang%2087.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 88", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580527/Dulur%20Undangan/Lintang%2088.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 89", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580529/Dulur%20Undangan/Lintang%2089.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 90", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580531/Dulur%20Undangan/Lintang%2090.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 91", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580532/Dulur%20Undangan/Lintang%2091.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 92", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580533/Dulur%20Undangan/Lintang%2092.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 93", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580535/Dulur%20Undangan/Lintang%2093.png", "harga": "Rp 1.395", "note": "Free Label & Plastik"}, {"code": "Lintang 94", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580537/Dulur%20Undangan/Lintang%2094.png", "harga": "Rp 1.370", "note": "Free Label & Plastik"}, {"code": "Lintang 95", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580538/Dulur%20Undangan/Lintang%2095.png", "harga": "Rp 1.370", "note": "Free Label & Plastik"}, {"code": "Lintang 99", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580539/Dulur%20Undangan/Lintang%2099.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Lintang 100", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580541/Dulur%20Undangan/Lintang%20100.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Lintang 101", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580542/Dulur%20Undangan/Lintang%20101.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Lintang 102", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580543/Dulur%20Undangan/Lintang%20102.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Lintang 103", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580544/Dulur%20Undangan/Lintang%20103.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Lintang 104", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580545/Dulur%20Undangan/Lintang%20104.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Lintang 105", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580547/Dulur%20Undangan/Lintang%20105.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Lintang 106", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580548/Dulur%20Undangan/Lintang%20106.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Lintang 107", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580549/Dulur%20Undangan/Lintang%20107.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Lintang 108", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580551/Dulur%20Undangan/Lintang%20108.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Lintang 109", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580552/Dulur%20Undangan/Lintang%20109.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "Lintang 110", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580553/Dulur%20Undangan/Lintang%20110.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "Lintang 111", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580555/Dulur%20Undangan/Lintang%20111.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Lintang 112", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580557/Dulur%20Undangan/Lintang%20112.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Lintang 113", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580559/Dulur%20Undangan/Lintang%20113.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Lintang 114", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580561/Dulur%20Undangan/Lintang%20114.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Lintang 115", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580562/Dulur%20Undangan/Lintang%20115.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}] },
+    katalog_maliq: { title: "Katalog Maliq", subtitle: "36 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585274/Dulur%20Undangan/Katalog%20Maliq.png", desain: [{"code": "Maliq 72", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580563/Dulur%20Undangan/Maliq%2072.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "Maliq 73", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580565/Dulur%20Undangan/Maliq%2073.png", "harga": "Rp 1.550", "note": "Free Label & Plastik"}, {"code": "Maliq 77", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580566/Dulur%20Undangan/Maliq%2077.png", "harga": "Rp 1.390", "note": "Free Label & Plastik"}, {"code": "Maliq 78", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580567/Dulur%20Undangan/Maliq%2078.png", "harga": "Rp 1.415", "note": "Free Label & Plastik"}, {"code": "Maliq 79", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580569/Dulur%20Undangan/Maliq%2079.png", "harga": "Rp 1.415", "note": "Free Label & Plastik"}, {"code": "Maliq 81", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580571/Dulur%20Undangan/Maliq%2081.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Maliq 82", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580572/Dulur%20Undangan/Maliq%2082.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Maliq 83", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580573/Dulur%20Undangan/Maliq%2083.png", "harga": "Rp 1.440", "note": "Free Label & Plastik"}, {"code": "Maliq 84", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580575/Dulur%20Undangan/Maliq%2084.png", "harga": "Rp 1.440", "note": "Free Label & Plastik"}, {"code": "Maliq 85", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580576/Dulur%20Undangan/Maliq%2085.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Maliq 88", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580579/Dulur%20Undangan/Maliq%2088.png", "harga": "Rp 1.415", "note": "Free Label & Plastik"}, {"code": "Maliq 89", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580580/Dulur%20Undangan/Maliq%2089.png", "harga": "Rp 1.415", "note": "Free Label & Plastik"}, {"code": "Maliq 90", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580582/Dulur%20Undangan/Maliq%2090.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Maliq 95", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580583/Dulur%20Undangan/Maliq%2095.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Maliq 96", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580585/Dulur%20Undangan/Maliq%2096.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Maliq 97", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580586/Dulur%20Undangan/Maliq%2097.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Maliq 98", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580588/Dulur%20Undangan/Maliq%2098.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Maliq 99", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580589/Dulur%20Undangan/Maliq%2099.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Maliq 100", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580590/Dulur%20Undangan/Maliq%20100.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Maliq 101", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580592/Dulur%20Undangan/Maliq%20101.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 102", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580593/Dulur%20Undangan/Maliq%20102.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 103", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580594/Dulur%20Undangan/Maliq%20103.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 104", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580595/Dulur%20Undangan/Maliq%20104.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 105", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580597/Dulur%20Undangan/Maliq%20105.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 106", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580598/Dulur%20Undangan/Maliq%20106.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Maliq 107", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580599/Dulur%20Undangan/Maliq%20107.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Maliq 108", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580601/Dulur%20Undangan/Maliq%20108.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Maliq 109", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580602/Dulur%20Undangan/Maliq%20109.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Maliq 110", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580604/Dulur%20Undangan/Maliq%20110.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Maliq 111", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580605/Dulur%20Undangan/Maliq%20111.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Maliq 112", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580606/Dulur%20Undangan/Maliq%20112.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Maliq 113", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580608/Dulur%20Undangan/Maliq%20113.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 114", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580610/Dulur%20Undangan/Maliq%20114.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 115", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580611/Dulur%20Undangan/Maliq%20115.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Maliq 116", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580613/Dulur%20Undangan/Maliq%20116.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Maliq 117", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580614/Dulur%20Undangan/Maliq%20117.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}] },
+    katalog_optima: { title: "Katalog Optima", subtitle: "20 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585270/Dulur%20Undangan/Katalog%20Optima.png", desain: [{"code": "Optima Kabinet 01 K", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580616/Dulur%20Undangan/Optima%20Kabinet%2001%20K.png", "harga": "Rp 1.192", "note": "Free Label & Plastik"}, {"code": "Optima Kabinet 02 K", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580617/Dulur%20Undangan/Optima%20Kabinet%2002%20K.png", "harga": "Rp 1.192", "note": "Free Label & Plastik"}, {"code": "Optima Kabinet 03 K", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580619/Dulur%20Undangan/Optima%20Kabinet%2003%20K.png", "harga": "Rp 1.192", "note": "Free Label & Plastik"}, {"code": "Optima Kabinet 04 K", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580620/Dulur%20Undangan/Optima%20Kabinet%2004%20K.png", "harga": "Rp 1.192", "note": "Free Label & Plastik"}, {"code": "Optima Kabinet 05 K", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580621/Dulur%20Undangan/Optima%20Kabinet%2005%20K.png", "harga": "Rp 1.192", "note": "Free Label & Plastik"}, {"code": "Optima Kabinet 06 K", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580623/Dulur%20Undangan/Optima%20Kabinet%2006%20K.png", "harga": "Rp 1.192", "note": "Free Label & Plastik"}, {"code": "Optima Lite 02 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580624/Dulur%20Undangan/Optima%20Lite%2002%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima Lite 03 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580626/Dulur%20Undangan/Optima%20Lite%2003%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima Lite 04 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580628/Dulur%20Undangan/Optima%20Lite%2004%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima Lite 05 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580630/Dulur%20Undangan/Optima%20Lite%2005%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima Lite 06 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580632/Dulur%20Undangan/Optima%20Lite%2006%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima Lite 07 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580634/Dulur%20Undangan/Optima%20Lite%2007%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima Lite 08 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580636/Dulur%20Undangan/Optima%20Lite%2008%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima Lite 09 L", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580637/Dulur%20Undangan/Optima%20Lite%2009%20L.png", "harga": "Rp 1.221", "note": "Free Label & Plastik"}, {"code": "Optima OP 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580639/Dulur%20Undangan/Optima%20OP%2001.png", "harga": "Rp 1.330", "note": "Free Label & Plastik"}, {"code": "Optima OP 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580640/Dulur%20Undangan/Optima%20OP%2002.png", "harga": "Rp 1.336", "note": "Free Label & Plastik"}, {"code": "Optima OP 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580642/Dulur%20Undangan/Optima%20OP%2003.png", "harga": "Rp 1.317", "note": "Free Label & Plastik"}, {"code": "Optima OP 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580643/Dulur%20Undangan/Optima%20OP%2004.png", "harga": "Rp 1.336", "note": "Free Label & Plastik"}, {"code": "Optima OP 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580645/Dulur%20Undangan/Optima%20OP%2005.png", "harga": "Rp 1.317", "note": "Free Label & Plastik"}, {"code": "Optima OP 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580647/Dulur%20Undangan/Optima%20OP%2006.png", "harga": "Rp 1.336", "note": "Free Label & Plastik"}] },
+    katalog_rayya: { title: "Katalog Rayya", subtitle: "26 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585272/Dulur%20Undangan/Katalog%20Rayya.png", desain: [{"code": "Rayya 351", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580648/Dulur%20Undangan/Rayya%20351.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Rayya 353", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580650/Dulur%20Undangan/Rayya%20353.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Rayya 354", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580651/Dulur%20Undangan/Rayya%20354.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Rayya 355", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580653/Dulur%20Undangan/Rayya%20355.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Rayya 357", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580654/Dulur%20Undangan/Rayya%20357.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Rayya 358", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580655/Dulur%20Undangan/Rayya%20358.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Rayya 359", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580657/Dulur%20Undangan/Rayya%20359.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Rayya 360", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580658/Dulur%20Undangan/Rayya%20360.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "Rayya 361", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580659/Dulur%20Undangan/Rayya%20361.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "Rayya 362", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580661/Dulur%20Undangan/Rayya%20362.png", "harga": "Rp 1.520", "note": "Free Label & Plastik"}, {"code": "Rayya 363", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580662/Dulur%20Undangan/Rayya%20363.png", "harga": "Rp 1.520", "note": "Free Label & Plastik"}, {"code": "Rayya 364", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580664/Dulur%20Undangan/Rayya%20364.png", "harga": "Rp 1.520", "note": "Free Label & Plastik"}, {"code": "Rayya 366", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580665/Dulur%20Undangan/Rayya%20366.png", "harga": "Rp 1.450", "note": "Free Label & Plastik"}, {"code": "Rayya 367", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580667/Dulur%20Undangan/Rayya%20367.png", "harga": "Rp 1.410", "note": "Free Label & Plastik"}, {"code": "Rayya 368", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580668/Dulur%20Undangan/Rayya%20368.png", "harga": "Rp 1.520", "note": "Free Label & Plastik"}, {"code": "Rayya 369", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580669/Dulur%20Undangan/Rayya%20369.png", "harga": "Rp 1.520", "note": "Free Label & Plastik"}, {"code": "Rayya 370", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580671/Dulur%20Undangan/Rayya%20370.png", "harga": "Rp 1.520", "note": "Free Label & Plastik"}, {"code": "Rayya 371", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580672/Dulur%20Undangan/Rayya%20371.png", "harga": "Rp 1.440", "note": "Free Label & Plastik"}, {"code": "Rayya 372", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580673/Dulur%20Undangan/Rayya%20372.png", "harga": "Rp 1.440", "note": "Free Label & Plastik"}, {"code": "Rayya 373", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580675/Dulur%20Undangan/Rayya%20373.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Rayya 374", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580676/Dulur%20Undangan/Rayya%20374.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Rayya 375", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580678/Dulur%20Undangan/Rayya%20375.png", "harga": "Rp 1.490", "note": "Free Label & Plastik"}, {"code": "Rayya 376", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580680/Dulur%20Undangan/Rayya%20376.png", "harga": "Rp 1.415", "note": "Free Label & Plastik"}, {"code": "Rayya 377", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580682/Dulur%20Undangan/Rayya%20377.png", "harga": "Rp 1.375", "note": "Free Label & Plastik"}, {"code": "Rayya 378", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580685/Dulur%20Undangan/Rayya%20378.png", "harga": "Rp 1.415", "note": "Free Label & Plastik"}, {"code": "Rayya 379", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580686/Dulur%20Undangan/Rayya%20379.png", "harga": "Rp 1.375", "note": "Free Label & Plastik"}] },
+    katalog_rizki: { title: "Katalog Rizki", subtitle: "33 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585268/Dulur%20Undangan/Katalog%20Rizki.png", desain: [{"code": "Rizki 27", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580688/Dulur%20Undangan/Rizki%2027.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 28", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580689/Dulur%20Undangan/Rizki%2028.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 30", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580690/Dulur%20Undangan/Rizki%2030.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 31", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580692/Dulur%20Undangan/Rizki%2031.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 32", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580693/Dulur%20Undangan/Rizki%2032.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 33", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580695/Dulur%20Undangan/Rizki%2033.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 35", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580697/Dulur%20Undangan/Rizki%2035.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 42", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580699/Dulur%20Undangan/Rizki%2042.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 43", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580700/Dulur%20Undangan/Rizki%2043.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 44", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580702/Dulur%20Undangan/Rizki%2044.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 45", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580704/Dulur%20Undangan/Rizki%2045.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 46", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580705/Dulur%20Undangan/Rizki%2046.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 47", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580707/Dulur%20Undangan/Rizki%2047.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 48", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580709/Dulur%20Undangan/Rizki%2048.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 49", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580713/Dulur%20Undangan/Rizki%2049.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 50", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580721/Dulur%20Undangan/Rizki%2050.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 51", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580722/Dulur%20Undangan/Rizki%2051.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 52", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580724/Dulur%20Undangan/Rizki%2052.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 53", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580726/Dulur%20Undangan/Rizki%2053.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 54", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580728/Dulur%20Undangan/Rizki%2054.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 55", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580730/Dulur%20Undangan/Rizki%2055.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 56", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580732/Dulur%20Undangan/Rizki%2056.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 57", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580734/Dulur%20Undangan/Rizki%2057.png", "harga": "Rp 1.370", "note": "Free Label & Plastik"}, {"code": "Rizki 58", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580735/Dulur%20Undangan/Rizki%2058.png", "harga": "Rp 1.370", "note": "Free Label & Plastik"}, {"code": "Rizki 59", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580737/Dulur%20Undangan/Rizki%2059.png", "harga": "Rp 1.370", "note": "Free Label & Plastik"}, {"code": "Rizki 60", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580738/Dulur%20Undangan/Rizki%2060.png", "harga": "Rp 1.370", "note": "Free Label & Plastik"}, {"code": "Rizki 61", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580740/Dulur%20Undangan/Rizki%2061.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Rizki 62", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580742/Dulur%20Undangan/Rizki%2062.png", "harga": "Rp 1.500", "note": "Free Label & Plastik"}, {"code": "Rizki 63", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580743/Dulur%20Undangan/Rizki%2063.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 64", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580744/Dulur%20Undangan/Rizki%2064.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 65", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580746/Dulur%20Undangan/Rizki%2065.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 66", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580747/Dulur%20Undangan/Rizki%2066.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Rizki 67", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580749/Dulur%20Undangan/Rizki%2067.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}] },
+    katalog_salma: { title: "Katalog Salma", subtitle: "33 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585269/Dulur%20Undangan/Katalog%20Salma.png", desain: [{"code": "Salma 186", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580751/Dulur%20Undangan/Salma%20186.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Salma 195", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580752/Dulur%20Undangan/Salma%20195.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Salma 197", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580754/Dulur%20Undangan/Salma%20197.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Salma 198", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580755/Dulur%20Undangan/Salma%20198.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Salma 201", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580758/Dulur%20Undangan/Salma%20201.png", "harga": "Rp 1.399", "note": "Free Label & Plastik"}, {"code": "Salma 202", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580759/Dulur%20Undangan/Salma%20202.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Salma 203", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580760/Dulur%20Undangan/Salma%20203.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Salma 204", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580762/Dulur%20Undangan/Salma%20204.png", "harga": "Rp 1.499", "note": "Free Label & Plastik"}, {"code": "Salma 205", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580763/Dulur%20Undangan/Salma%20205.png", "harga": "Rp 1.430", "note": "Free Label & Plastik"}, {"code": "Salma 206", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580765/Dulur%20Undangan/Salma%20206.png", "harga": "Rp 1.430", "note": "Free Label & Plastik"}, {"code": "Salma 207", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580766/Dulur%20Undangan/Salma%20207.png", "harga": "Rp 1.485", "note": "Free Label & Plastik"}, {"code": "Salma 208", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580767/Dulur%20Undangan/Salma%20208.png", "harga": "Rp 1.485", "note": "Free Label & Plastik"}, {"code": "Salma 209", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580769/Dulur%20Undangan/Salma%20209.png", "harga": "Rp 1.485", "note": "Free Label & Plastik"}, {"code": "Salma 210", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580770/Dulur%20Undangan/Salma%20210.png", "harga": "Rp 1.485", "note": "Free Label & Plastik"}, {"code": "Salma 211", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580772/Dulur%20Undangan/Salma%20211.png", "harga": "Rp 1.355", "note": "Free Label & Plastik"}, {"code": "Salma 212", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580773/Dulur%20Undangan/Salma%20212.png", "harga": "Rp 1.355", "note": "Free Label & Plastik"}, {"code": "Salma 213", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580775/Dulur%20Undangan/Salma%20213.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Salma 214", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580776/Dulur%20Undangan/Salma%20214.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Salma 215", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580779/Dulur%20Undangan/Salma%20215.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Salma 216", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580780/Dulur%20Undangan/Salma%20216.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Salma 217", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580781/Dulur%20Undangan/Salma%20217.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "Salma Eco 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580782/Dulur%20Undangan/Salma%20Eco%2001.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Salma Eco 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580784/Dulur%20Undangan/Salma%20Eco%2002.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Salma Eco 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580785/Dulur%20Undangan/Salma%20Eco%2003.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Salma Eco 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580787/Dulur%20Undangan/Salma%20Eco%2004.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Salma Eco 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580788/Dulur%20Undangan/Salma%20Eco%2005.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Salma Eco 07", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580790/Dulur%20Undangan/Salma%20Eco%2007.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Salma Eco 08", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580792/Dulur%20Undangan/Salma%20Eco%2008.png", "harga": "Rp 1.309", "note": "Free Label & Plastik"}, {"code": "Salma Murce-1", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580793/Dulur%20Undangan/Salma%20Murce-1.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Salma Murce-2", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580795/Dulur%20Undangan/Salma%20Murce-2.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Salma Murce-3", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580796/Dulur%20Undangan/Salma%20Murce-3.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Salma Murce-4", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580798/Dulur%20Undangan/Salma%20Murce-4.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}, {"code": "Salma Murce-5", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580799/Dulur%20Undangan/Salma%20Murce-5.png", "harga": "Rp 1.365", "note": "Free Label & Plastik"}] },
+    katalog_samara: { title: "Katalog Samara", subtitle: "6 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585266/Dulur%20Undangan/Katalog%20Samara.png", desain: [{"code": "Samara SM 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580801/Dulur%20Undangan/Samara%20SM%2001.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Samara SM 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580802/Dulur%20Undangan/Samara%20SM%2002.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Samara SM 03", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580804/Dulur%20Undangan/Samara%20SM%2003.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Samara SM 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580805/Dulur%20Undangan/Samara%20SM%2004.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Samara SM 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580807/Dulur%20Undangan/Samara%20SM%2005.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}, {"code": "Samara SM 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580808/Dulur%20Undangan/Samara%20SM%2006.png", "harga": "Rp 1.385", "note": "Free Label & Plastik"}] },
+    katalog_griya_premium: { title: "Katalog Griya Premium", subtitle: "44 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585264/Dulur%20Undangan/Katalog%20Griya%20Premium.png", desain: [{"code": "SCA 001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580809/Dulur%20Undangan/SCA%20001.png", "harga": "Rp 1.718", "note": "Free Label & Plastik"}, {"code": "SCA 002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580811/Dulur%20Undangan/SCA%20002.png", "harga": "Rp 1.718", "note": "Free Label & Plastik"}, {"code": "SCA 003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580812/Dulur%20Undangan/SCA%20003.png", "harga": "Rp 1.718", "note": "Free Label & Plastik"}, {"code": "SCA 004", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580813/Dulur%20Undangan/SCA%20004.png", "harga": "Rp 1.718", "note": "Free Label & Plastik"}, {"code": "SCA 005", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580814/Dulur%20Undangan/SCA%20005.png", "harga": "Rp 1.718", "note": "Free Label & Plastik"}, {"code": "SCA 006", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580816/Dulur%20Undangan/SCA%20006.png", "harga": "Rp 1.718", "note": "Free Label & Plastik"}, {"code": "SCB 001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580817/Dulur%20Undangan/SCB%20001.png", "harga": "Rp 1.740", "note": "Free Label & Plastik"}, {"code": "SCB 002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580818/Dulur%20Undangan/SCB%20002.png", "harga": "Rp 1.740", "note": "Free Label & Plastik"}, {"code": "SCB 003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580820/Dulur%20Undangan/SCB%20003.png", "harga": "Rp 1.740", "note": "Free Label & Plastik"}, {"code": "SCC 001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580821/Dulur%20Undangan/SCC%20001.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580823/Dulur%20Undangan/SCC%20002.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580824/Dulur%20Undangan/SCC%20003.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 004", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580826/Dulur%20Undangan/SCC%20004.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 006", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580829/Dulur%20Undangan/SCC%20006.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 007", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580830/Dulur%20Undangan/SCC%20007.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 008", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580831/Dulur%20Undangan/SCC%20008.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 009", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580833/Dulur%20Undangan/SCC%20009.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 010", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580834/Dulur%20Undangan/SCC%20010.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 011", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580836/Dulur%20Undangan/SCC%20011.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 012", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580837/Dulur%20Undangan/SCC%20012.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 013", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580838/Dulur%20Undangan/SCC%20013.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 014", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580840/Dulur%20Undangan/SCC%20014.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 015", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580842/Dulur%20Undangan/SCC%20015.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 016", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580843/Dulur%20Undangan/SCC%20016.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 017", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580845/Dulur%20Undangan/SCC%20017.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 018", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580846/Dulur%20Undangan/SCC%20018.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 019", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580848/Dulur%20Undangan/SCC%20019.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCC 020", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580849/Dulur%20Undangan/SCC%20020.png", "harga": "Rp 1.810", "note": "Free Label & Plastik"}, {"code": "SCD 001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580850/Dulur%20Undangan/SCD%20001.png", "harga": "Rp 1.805", "note": "Free Label & Plastik"}, {"code": "SCD 003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580851/Dulur%20Undangan/SCD%20003.png", "harga": "Rp 1.805", "note": "Free Label & Plastik"}, {"code": "SCE 002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580853/Dulur%20Undangan/SCE%20002.png", "harga": "Rp 1.890", "note": "Free Label & Plastik"}, {"code": "SCE 003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580854/Dulur%20Undangan/SCE%20003.png", "harga": "Rp 1.863", "note": "Free Label & Plastik"}, {"code": "SCE 004", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580855/Dulur%20Undangan/SCE%20004.png", "harga": "Rp 1.890", "note": "Free Label & Plastik"}, {"code": "SCF 001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580857/Dulur%20Undangan/SCF%20001.png", "harga": "Rp 1.890", "note": "Free Label & Plastik"}, {"code": "SCF 002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580858/Dulur%20Undangan/SCF%20002.png", "harga": "Rp 1.890", "note": "Free Label & Plastik"}, {"code": "SCF 003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580859/Dulur%20Undangan/SCF%20003.png", "harga": "Rp 1.890", "note": "Free Label & Plastik"}, {"code": "SCPB 001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580861/Dulur%20Undangan/SCPB%20001.png", "harga": "Rp 4.150", "note": "Free Label & Plastik"}, {"code": "SCPB 002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580862/Dulur%20Undangan/SCPB%20002.png", "harga": "Rp 4.150", "note": "Free Label & Plastik"}, {"code": "SCPB 003", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580863/Dulur%20Undangan/SCPB%20003.png", "harga": "Rp 4.150", "note": "Free Label & Plastik"}, {"code": "SCPL 001", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580864/Dulur%20Undangan/SCPL%20001.png", "harga": "Rp 3.897", "note": "Free Label & Plastik"}, {"code": "SCPL 002", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580865/Dulur%20Undangan/SCPL%20002.png", "harga": "Rp 3.940", "note": "Free Label & Plastik"}, {"code": "SCPL 004", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580867/Dulur%20Undangan/SCPL%20004.png", "harga": "Rp 3.897", "note": "Free Label & Plastik"}, {"code": "SCPL 005", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580868/Dulur%20Undangan/SCPL%20005.png", "harga": "Rp 3.897", "note": "Free Label & Plastik"}, {"code": "SCPL 007", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580869/Dulur%20Undangan/SCPL%20007.png", "harga": "Rp 3.897", "note": "Free Label & Plastik"}] },
+    katalog_u2_you_too: { title: "Katalog U2 You Too", subtitle: "5 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585262/Dulur%20Undangan/Katalog%20U2%20You%20Too.png", desain: [{"code": "U2 You Too 01", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580871/Dulur%20Undangan/U2%20You%20Too%2001.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "U2 You Too 02", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580872/Dulur%20Undangan/U2%20You%20Too%2002.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "U2 You Too 04", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580874/Dulur%20Undangan/U2%20You%20Too%2004.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "U2 You Too 05", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580875/Dulur%20Undangan/U2%20You%20Too%2005.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}, {"code": "U2 You Too 06", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580876/Dulur%20Undangan/U2%20You%20Too%2006.png", "harga": "Rp 1.350", "note": "Free Label & Plastik"}] },
+    katalog_x: { title: "Katalog X", subtitle: "6 pilihan referensi desain", thumbnail: "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774585261/Dulur%20Undangan/Katalog%20X.png", desain: [{"code": "X-1", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580878/Dulur%20Undangan/X-1.png", "harga": "Rp 4.100", "note": "Free Label & Plastik"}, {"code": "X-2", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580879/Dulur%20Undangan/X-2.png", "harga": "Rp 4.100", "note": "Free Label & Plastik"}, {"code": "X-3", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580880/Dulur%20Undangan/X-3.png", "harga": "Rp 4.100", "note": "Free Label & Plastik"}, {"code": "X-4", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580882/Dulur%20Undangan/X-4.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}, {"code": "X-5", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580883/Dulur%20Undangan/X-5.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}, {"code": "X-6", "link": "https://res.cloudinary.com/dz9ysnor1/image/upload/v1774580885/Dulur%20Undangan/X-6.png", "harga": "Rp 1.515", "note": "Free Label & Plastik"}] }
+  };
+
+  // ── SIDEBAR ─────────────────────────────────────────────
+  let currentProductTitle = '';
+
+  function openSidebar(key) {
+    const data = desainData[key];
+    currentProductTitle = data.title;
+    document.getElementById('sidebar-title').textContent = data.title;
+    document.getElementById('sidebar-subtitle').textContent = data.subtitle;
+
+    const grid = document.getElementById('desain-grid');
+    grid.innerHTML = data.desain.map(d => `
+      <div class="desain-card" onclick="openOrderModal('${d.code}','${d.harga}','${d.link}','${d.note||''}')">
+        <img class="desain-img" src="${d.link}" alt="${d.code}"
+             loading="lazy"
+             onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22160%22><rect fill=%22%23f5e6e8%22 width=%22200%22 height=%22160%22/><text x=%22100%22 y=%2280%22 text-anchor=%22middle%22 fill=%22%23C4848A%22 font-size=%2213%22>${d.code}</text></svg>'">
+        <div class="desain-info">
+          <div class="desain-code">${d.code}</div>
+          <div class="desain-price">${d.harga}<span style="font-size:0.7rem;color:#aaa;font-family:'DM Sans',sans-serif;font-weight:400;">/pcs</span></div>
+          ${d.note ? `<span class="desain-note">${d.note}</span>` : ''}
+        </div>
+      </div>
+    `).join('');
+
+    document.getElementById('overlay').classList.add('active');
+    document.getElementById('sidebar').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSidebar() {
+    document.getElementById('overlay').classList.remove('active');
+    document.getElementById('sidebar').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ── ORDER MODAL ──────────────────────────────────────────
+  let selectedDesain = {};
+
+  function openOrderModal(code, harga, imgLink, note) {
+    selectedDesain = { code, harga, imgLink, note };
+
+    document.getElementById('modal-thumb').src = imgLink;
+    document.getElementById('modal-code').textContent = code;
+    document.getElementById('modal-name').textContent = currentProductTitle;
+    document.getElementById('modal-price').textContent = harga + '/pcs' + (note ? ' · ' + note : '');
+
+    // Reset form
+    document.getElementById('input-nama').value = '';
+    document.getElementById('input-tanggal').value = '';
+    document.getElementById('input-nama').classList.remove('error');
+    document.getElementById('input-tanggal').classList.remove('error');
+    document.getElementById('err-nama').classList.remove('show');
+    document.getElementById('err-tanggal').classList.remove('show');
+
+    document.getElementById('modal-overlay').classList.add('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('active');
+  }
+
+  function handleModalOverlayClick(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  function orderViaWA() {
+    const nama = document.getElementById('input-nama').value.trim();
+    const tanggal = document.getElementById('input-tanggal').value;
+    let valid = true;
+
+    if (!nama) {
+      document.getElementById('input-nama').classList.add('error');
+      document.getElementById('err-nama').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('input-nama').classList.remove('error');
+      document.getElementById('err-nama').classList.remove('show');
+    }
+
+    if (!tanggal) {
+      document.getElementById('input-tanggal').classList.add('error');
+      document.getElementById('err-tanggal').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('input-tanggal').classList.remove('error');
+      document.getElementById('err-tanggal').classList.remove('show');
+    }
+
+    if (!valid) return;
+
+    // Format tanggal ke Indonesia
+    const tgl = new Date(tanggal);
+    const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const tglFormatted = `${tgl.getDate()} ${bulan[tgl.getMonth()]} ${tgl.getFullYear()}`;
+
+    const pesan =
+`Assalamu'alaikum / Halo Kak Admin Dulur Undangan 👋
+
+Saya ingin melakukan *booking undangan pernikahan* dengan detail berikut:
+
+📋 *Detail Pesanan:*
+• Produk     : ${currentProductTitle}
+• Kode Desain: ${selectedDesain.code}
+• Harga      : ${selectedDesain.harga}/pcs
+${selectedDesain.note ? `• Keterangan : ${selectedDesain.note}\n` : ''}
+👤 *Data Pemesan:*
+• Nama       : ${nama}
+• Tanggal Acara: ${tglFormatted}
+
+Mohon informasi lebih lanjut mengenai:
+1. Ketersediaan slot & stok untuk tanggal tersebut
+2. Detail pembayaran DP 20% untuk booking
+3. Estimasi waktu produksi
+
+Terima kasih, ditunggu konfirmasinya ya Kak! 🙏`;
+
+    const encoded = encodeURIComponent(pesan);
+    window.open(`https://wa.me/6285714746412?text=${encoded}`, '_blank');
+  }
+
+  // ESC to close
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeSidebar(); }
+  });
+
+  // ── NAV SCROLL ──────────────────────────────────────────
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── REVEAL ON SCROLL ────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
